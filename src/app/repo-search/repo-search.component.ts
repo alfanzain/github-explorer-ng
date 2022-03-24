@@ -1,11 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
-
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+
+import {NgbModal, NgbActiveModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 import { Repository } from '../repository';
 import { RepositoryService } from '../repository.service';
+
+@Component({
+  selector: 'ngbd-modal-content',
+  templateUrl: './repo-detail-modal.component.html'
+})
+export class NgbdModalContent {
+  @Input() repo: any;
+
+  constructor(public activeModal: NgbActiveModal) {}
+}
 
 @Component({
   selector: 'app-repo-search',
@@ -20,7 +31,7 @@ export class RepoSearchComponent implements OnInit {
 
   private searchTerms = new Subject<string>();
 
-  constructor(private repositoryService: RepositoryService) {}
+  constructor(private repositoryService: RepositoryService, private modalService: NgbModal) {}
 
   // Push a search term into the observable stream.
   search(term: string): void {
@@ -40,5 +51,20 @@ export class RepoSearchComponent implements OnInit {
     ).subscribe(
       repos => this.repositories = (repos as any).items
     );
+  }
+
+  open(repo: Repository) {
+    const modalRef = this.modalService.open(NgbdModalContent);
+    modalRef.componentInstance.repo = repo;
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }
