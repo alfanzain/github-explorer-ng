@@ -8,6 +8,7 @@ import {NgbModal, NgbActiveModal, ModalDismissReasons} from '@ng-bootstrap/ng-bo
 import { Repository } from '../repository';
 import { RepositoryService } from '../repository.service';
 
+// Ng Bootstrap Modal Content for detail repository
 @Component({
   selector: 'ngbd-modal-content',
   templateUrl: './repo-detail-modal.component.html'
@@ -18,6 +19,7 @@ export class NgbdModalContent {
   constructor(public activeModal: NgbActiveModal) {}
 }
 
+// Search component
 @Component({
   selector: 'app-repo-search',
   templateUrl: './repo-search.component.html',
@@ -56,15 +58,5 @@ export class RepoSearchComponent implements OnInit {
   open(repo: Repository) {
     const modalRef = this.modalService.open(NgbdModalContent);
     modalRef.componentInstance.repo = repo;
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
   }
 }
