@@ -1,0 +1,41 @@
+<div id="search-component">
+  <label for="search-box">Repo Search</label>
+  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+
+  <!-- <ul class="search-result">
+    <li *ngFor="let repo of repositories" >
+      <a routerLink="/detail/{{repo.id}}">
+        {{repo.full_name}}
+      </a>
+    </li>
+  </ul> -->
+
+  <table border="1" style="margin-top: 1rem; border-collapse: collapse;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Description</th>
+        <th>URL</th>
+        <th>Watch</th>
+        <th>Stars</th>
+        <th>Forks</th>
+        <th>Open Issues</th>
+        <th>Updated Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let repo of repositories">
+        <td>{{ repo.full_name }}</td>
+        <td>{{ repo.owner.login }}</td>
+        <td>{{ repo.description }}</td>
+        <td>{{ repo.html_url }}</td>
+        <td>{{ repo.watchers_count }}</td>
+        <td>{{ repo.stargazers_count }}</td>
+        <td>{{ repo.forks_count }}</td>
+        <td>{{ repo.open_issues_count }}</td>
+        <td>{{ repo.updated_at }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
