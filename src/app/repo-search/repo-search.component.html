@@ -1,16 +1,7 @@
 <div id="search-component">
-  <label for="search-box">Repo Search</label>
-  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+  <input class="form-control" #searchBox id="search-box" (input)="search(searchBox.value)" placeholder="Search..." autocomplete="off"/>
 
-  <!-- <ul class="search-result">
-    <li *ngFor="let repo of repositories" >
-      <a routerLink="/detail/{{repo.id}}">
-        {{repo.full_name}}
-      </a>
-    </li>
-  </ul> -->
-
-  <table border="1" style="margin-top: 1rem; border-collapse: collapse;">
+  <table class="table table-striped mt-2">
     <thead>
       <tr>
         <th>Name</th>
@@ -22,19 +13,23 @@
         <th>Forks</th>
         <th>Open Issues</th>
         <th>Updated Date</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let repo of repositories">
         <td>{{ repo.full_name }}</td>
-        <td>{{ repo.owner.login }}</td>
+        <td><img src="{{ repo.owner.avatar_url }}" width="50" class="img-thumbnail" alt="{{ repo.owner.login }}"><br />{{ repo.owner.login }}</td>
         <td>{{ repo.description }}</td>
-        <td>{{ repo.html_url }}</td>
+        <td><a href="{{ repo.html_url }}">{{ repo.html_url }}</a></td>
         <td>{{ repo.watchers_count }}</td>
         <td>{{ repo.stargazers_count }}</td>
         <td>{{ repo.forks_count }}</td>
         <td>{{ repo.open_issues_count }}</td>
         <td>{{ repo.updated_at }}</td>
+        <td>
+
+        </td>
       </tr>
     </tbody>
   </table>

@@ -14,7 +14,9 @@ export interface Repository {
   created_at: string;
   updated_at: string;
   owner: {
-    login: string
+    id: number,
+    login: string,
+    avatar_url: string
   };
   author_avatar: string;
 }
